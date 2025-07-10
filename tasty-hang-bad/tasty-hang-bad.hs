@@ -4,10 +4,12 @@ module Main where
 
 import Prelude
 
+import Control.Exception
 import Control.Monad (void)
 import Data.ByteString qualified as BS
 import Data.List qualified as L
 import System.Environment qualified as E
+import System.Exit
 
 import Hedgehog qualified as H
 import Test.Tasty qualified as T
@@ -36,4 +38,10 @@ ingredients = T.defaultIngredients
 main :: IO ()
 main = do
   args <- E.getArgs
-  E.withArgs ([] <> args) $ tests >>= T.defaultMainWithIngredients ingredients
+  let go i
+        | i <= 10000 = do
+          catch (E.withArgs ([] <> args) $ tests >>= T.defaultMainWithIngredients ingredients) $ \exc -> print (exc :: ExitCode)
+          putStrLn $ "Successful " ++ show i ++ " iteration"
+          go (i + 1 :: Int)
+        | otherwise = pure ()
+  go 1
