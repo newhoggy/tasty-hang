@@ -38,11 +38,12 @@ ingredients = T.defaultIngredients
 
 main :: IO ()
 main = do
-  args <- E.getArgs
-  let go i
-        | i <= 10000 = do
+  nStr:args <- E.getArgs
+  let n = read nStr :: Int
+      go i
+        | i <= n = do
           catch (E.withArgs ([] <> args) $ tests >>= T.defaultMainWithIngredients ingredients) $ \exc -> print (exc :: ExitCode)
-          hPutStrLn stderr $ "Successful " ++ show i ++ " iteration"
+          hPutStrLn stderr $ "Successful " ++ show i ++ "/" ++ nStr ++ " iteration"
           go (i + 1 :: Int)
         | otherwise = pure ()
   go 1
