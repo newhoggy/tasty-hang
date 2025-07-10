@@ -1,0 +1,57 @@
+cabal-version:        3.8
+name:                 tasty-hang
+version:              0.0.0.1
+synopsis:             Tasty hang
+description:          Tasty hang.
+copyright:            2025 Tasty hang.
+author:               John Ky
+maintainer:           newhoggy@gmail.com
+category:             Test
+license:              BSD-3-Clause
+license-files:        LICENSE
+                      NOTICE
+build-type:           Simple
+extra-source-files:   README.md
+
+common project-config
+  default-language:   Haskell2010
+  default-extensions: ImportQualifiedPost 
+                      OverloadedStrings
+
+  build-depends:      base >=4.14 && <4.22
+  ghc-options:        -Wall
+  ghc-options:        -Wunused-packages
+
+executable tasty-hang-good
+  import:             project-config
+  hs-source-dirs:     tasty-hang-good
+  main-is:            tasty-hang-good.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      bytestring,
+                      tasty,
+                      tasty-hunit,
+
+executable tasty-hang-bad
+  import:             project-config
+  hs-source-dirs:     tasty-hang-bad
+  main-is:            tasty-hang-bad.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      bytestring,
+                      hedgehog,
+                      tasty,
+                      tasty-hunit,
+
+executable tasty-hang-none
+  import:             project-config
+  hs-source-dirs:     tasty-hang-none
+  main-is:            tasty-hang-none.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      bytestring,
+                      hedgehog,
+                      unliftio,
