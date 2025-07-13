@@ -1,7 +1,3 @@
-{-# LANGUAGE FlexibleInstances #-}
-
-module Main where
-
 import Prelude
 
 import Control.Monad (void)

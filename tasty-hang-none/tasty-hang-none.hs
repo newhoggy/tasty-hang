@@ -1,7 +1,3 @@
-{-# LANGUAGE FlexibleInstances #-}
-
-module Main (main) where
-
 import Prelude
 
 import Control.Concurrent (getNumCapabilities)

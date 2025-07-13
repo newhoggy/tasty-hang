@@ -1,7 +1,3 @@
-{-# LANGUAGE FlexibleInstances #-}
-
-module Main where
-
 import Prelude
 
 import Data.ByteString qualified as BS
