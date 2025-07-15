@@ -1,4 +1,10 @@
 packages:
   .
 
---  ../check/pkgs/check-core
+source-repository-package
+  type: git
+  location: git@github.com:haskell-works/check.git
+  tag: fee1b8c7d2d1a52f3665e9706963916745b4e9ea
+  subdir:
+    pkgs/check-core
+    pkgs/check-hedgehog

@@ -12,7 +12,7 @@ main :: IO ()
 main = do
   tests <- forM (id @[Int] [0..170 - 1]) $ \i -> do
     pure $
-      VeriTest
+      Test
       { name = TestName $ "tasty-hang-veritas-" <> show i
       , description = "Test " <> show i
       , test = id @(IO Bool) $
