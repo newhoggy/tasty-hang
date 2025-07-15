@@ -1,3 +1,4 @@
 packages:
   .
-  ../veritas/pkgs/veritas/
+
+--  ../check/pkgs/check-core

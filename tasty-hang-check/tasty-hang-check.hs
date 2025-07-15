@@ -4,7 +4,7 @@ import Data.ByteString qualified as BS
 import HaskellWorks.Prelude
 import Hedgehog qualified as H
 import System.Exit
-import Veritas
+import Test.Check.Core
 
 {- HLINT ignore "Use let" -}
 
