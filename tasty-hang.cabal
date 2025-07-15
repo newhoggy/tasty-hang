@@ -48,6 +48,18 @@ executable tasty-hang-bad
                       tasty,
                       tasty-hunit,
 
+executable tasty-hang-check2
+  import:             project-config
+  hs-source-dirs:     tasty-hang-check2
+  main-is:            tasty-hang-check2.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      bytestring,
+                      hedgehog,
+                      tasty,
+                      tasty-hunit,
+
 executable tasty-hang-none
   import:             project-config
   hs-source-dirs:     tasty-hang-none
