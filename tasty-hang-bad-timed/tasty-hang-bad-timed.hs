@@ -28,8 +28,8 @@ tests = do
   t1 <-
     pure $
       testCaseInfo "t1" $ do
-        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $ do
-          void . H.evalIO $ timeIt $ BS.readFile "README.md"
+        timeIt . void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $ do
+          void . H.evalIO $ BS.readFile "README.md"
         pure "done"
 
   pure $
