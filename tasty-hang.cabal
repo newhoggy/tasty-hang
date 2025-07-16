@@ -48,6 +48,18 @@ executable tasty-hang-bad
                       tasty,
                       tasty-hunit,
 
+executable tasty-hang-bad-timed
+  import:             project-config
+  hs-source-dirs:     tasty-hang-bad-timed
+  main-is:            tasty-hang-bad-timed.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      bytestring,
+                      hedgehog,
+                      tasty,
+                      tasty-hunit,
+
 executable tasty-hang-check2
   import:             project-config
   hs-source-dirs:     tasty-hang-check2
@@ -82,3 +94,15 @@ executable tasty-hang-check
                       check-core,
                       hedgehog,
                       hw-prelude,
+
+executable tasty-hang-readless
+  import:             project-config
+  hs-source-dirs:     tasty-hang-readless
+  main-is:            tasty-hang-readless.hs
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+  build-depends:      hedgehog,
+                      random,
+                      tasty,
+                      tasty-hunit,
