@@ -112,5 +112,5 @@ main = do
   E.withArgs ([] <> args) $ do
     ts <- tests
     exitCode <- defaultMainWithIngredients2 ingredients ts
-    logStats
+    -- logStats
     IO.exitWith exitCode
