@@ -49,15 +49,13 @@ tests = do
   t1 <-
     pure $
       testCaseInfo "t1" $ do
-        bracket_
-          do  pure () -- incCounter tvOuterEnter
-          do  pure () -- incCounter tvOuterExit
-          do  void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $
-                void . H.evalIO $
-                  -- bracket_
-                  --   (incCounter tvInnerEnter)
-                  --   (incCounter tvInnerExit)
-                    BS.readFile "README.md"
+        incCounter tvOuterEnter
+        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $
+          void . H.evalIO $ do
+            incCounter tvInnerEnter
+            void $ BS.readFile "README.md"
+            incCounter tvInnerExit
+        incCounter tvOuterExit
           
         pure "done"
 
@@ -108,9 +106,9 @@ defaultMainWithIngredients2 ins testTree = do
 main :: IO ()
 main = do
   args <- E.getArgs
-  -- void $ IO.forkIO $ forever $ logStats >> IO.threadDelay 1000000
+  void $ IO.forkIO $ forever $ IO.threadDelay 1000000 >> logStats
   E.withArgs ([] <> args) $ do
     ts <- tests
     exitCode <- defaultMainWithIngredients2 ingredients ts
-    -- logStats
+    logStats
     IO.exitWith exitCode
