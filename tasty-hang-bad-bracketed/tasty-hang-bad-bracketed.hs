@@ -6,6 +6,7 @@ import Control.Concurrent.STM (TVar)
 import Control.Concurrent.STM qualified as STM
 import Control.Exception (bracket_)
 import Control.Monad
+import Control.Monad.IO.Class (MonadIO(..))
 import Data.ByteString qualified as BS
 import Data.List qualified as L
 import Hedgehog qualified as H
@@ -50,11 +51,10 @@ tests = do
     pure $
       testCaseInfo "t1" $ do
         incCounter tvOuterEnter
-        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $
-          void . H.evalIO $ do
-            incCounter tvInnerEnter
-            void $ BS.readFile "README.md"
-            incCounter tvInnerExit
+        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $ do
+          liftIO $ incCounter tvInnerEnter
+          void . H.evalIO $ void $ BS.readFile "README.md"
+          liftIO $ incCounter tvInnerExit
         incCounter tvOuterExit
           
         pure "done"
