@@ -20,20 +20,14 @@ lock1 :: MVar ()
 lock1 = IO.unsafePerformIO $ newMVar ()
 {-# NOINLINE lock1 #-}
 
-lock2 :: MVar ()
-lock2 = IO.unsafePerformIO $ newMVar ()
-{-# NOINLINE lock2 #-}
-
 tests :: IO T.TestTree
 tests = do
   t1 <-
     pure $
       testCaseInfo "t1" $ do
-        randomRIO (4648, 27242) >>= IO.threadDelay
+        us1 <- randomRIO (1264848, 6609154)
         withLock lock1 $ IO.threadDelay 1000
-        randomRIO (4648, 27242) >>= IO.threadDelay
-        withLock lock2 $ IO.threadDelay 1000
-        randomRIO (4648, 27242) >>= IO.threadDelay
+        IO.threadDelay us1
         pure "done"
 
   pure $
