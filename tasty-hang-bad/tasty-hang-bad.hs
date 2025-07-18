@@ -6,6 +6,7 @@ import Data.List qualified as L
 import System.Environment qualified as E
 
 import Hedgehog qualified as H
+import Tasty.Hang
 import Test.Tasty qualified as T
 import Test.Tasty.HUnit
 import Test.Tasty.Ingredients qualified as T
@@ -17,7 +18,7 @@ tests = do
   t1 <-
     pure $
       testCaseInfo "t1" $ do
-        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $ do
+        void . H.writeCheck writeStrLn . H.withTests 1 . H.withShrinks 0 . H.property $ do
           void . H.evalIO $ BS.readFile "README.md"
         pure "done"
 

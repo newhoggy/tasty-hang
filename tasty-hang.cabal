@@ -26,6 +26,14 @@ common project-config
   ghc-options:        -Wall
   ghc-options:        -Wunused-packages
 
+library tasty-hang-lib
+  import:             project-config
+  hs-source-dirs:     tasty-hang-lib
+  exposed-modules:    Tasty.Hang
+  ghc-options:        -threaded
+                      -rtsopts
+                      "-with-rtsopts=-N -T"
+
 executable tasty-hang-good
   import:             project-config
   hs-source-dirs:     tasty-hang-good
@@ -48,6 +56,7 @@ executable tasty-hang-bad
                       hedgehog,
                       tasty,
                       tasty-hunit,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-bad-bracketed
   import:             project-config
@@ -61,6 +70,7 @@ executable tasty-hang-bad-bracketed
                       stm,
                       tasty,
                       tasty-hunit,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-bad-timed
   import:             project-config
@@ -73,6 +83,7 @@ executable tasty-hang-bad-timed
                       hedgehog,
                       tasty,
                       tasty-hunit,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-check2
   import:             project-config
@@ -85,6 +96,7 @@ executable tasty-hang-check2
                       hedgehog,
                       tasty,
                       tasty-hunit,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-none
   import:             project-config
@@ -96,6 +108,7 @@ executable tasty-hang-none
   build-depends:      bytestring,
                       hedgehog,
                       unliftio,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-check
   import:             project-config
@@ -108,6 +121,7 @@ executable tasty-hang-check
                       check-core,
                       hedgehog,
                       hw-prelude,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-readless
   import:             project-config
@@ -120,6 +134,7 @@ executable tasty-hang-readless
                       random,
                       tasty,
                       tasty-hunit,
+                      tasty-hang:tasty-hang-lib,
 
 executable tasty-hang-hunit-readless
   import:             project-config

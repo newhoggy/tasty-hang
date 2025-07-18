@@ -4,6 +4,7 @@ import Data.ByteString qualified as BS
 import HaskellWorks.Prelude
 import Hedgehog qualified as H
 import System.Exit
+import Tasty.Hang
 import Test.Check.Core
 
 {- HLINT ignore "Use let" -}
@@ -16,7 +17,7 @@ main = do
       { name = TestName $ "tasty-hang-veritas-" <> show i
       , description = "Test " <> show i
       , test = id @(IO Bool) $
-          H.check $ H.withTests 1 . H.withShrinks 0 . H.property $ do
+          H.writeCheck writeStrLn $ H.withTests 1 . H.withShrinks 0 . H.property $ do
             void $ H.evalIO $ BS.readFile "README.md"
       }
 

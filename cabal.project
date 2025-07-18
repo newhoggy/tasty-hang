@@ -8,3 +8,9 @@ source-repository-package
   subdir:
     pkgs/check-core
     pkgs/check-hedgehog
+
+source-repository-package
+  type: git
+  location: https://github.com/haskell-works/haskell-hedgehog
+  tag: 8bf41806f9ad8333dda539c61737fc0a67861ca0
+  subdir: hedgehog

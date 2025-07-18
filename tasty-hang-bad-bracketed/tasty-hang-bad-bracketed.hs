@@ -14,6 +14,7 @@ import System.Environment qualified as E
 import System.Exit qualified as IO
 import System.IO qualified as IO
 import System.IO.Unsafe qualified as IO
+import Tasty.Hang
 import Test.Tasty qualified as T
 import Test.Tasty.HUnit
 import Test.Tasty.Ingredients qualified as T
@@ -51,7 +52,7 @@ tests = do
     pure $
       testCaseInfo "t1" $ do
         incCounter tvOuterEnter
-        void . H.check . H.withTests 1 . H.withShrinks 0 . H.property $ do
+        void . H.writeCheck writeStrLn . H.withTests 1 . H.withShrinks 0 . H.property $ do
           liftIO $ incCounter tvInnerEnter
           void . H.evalIO $ void $ BS.readFile "README.md"
           liftIO $ incCounter tvInnerExit
