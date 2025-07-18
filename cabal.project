@@ -12,5 +12,5 @@ source-repository-package
 source-repository-package
   type: git
   location: https://github.com/haskell-works/haskell-hedgehog
-  tag: dc793c504bc65276fb0093c2b0e032978a577ff2
+  tag: db3775d54daab7066598275fe9eac8da8d94c882
   subdir: hedgehog
