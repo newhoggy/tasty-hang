@@ -24,7 +24,7 @@ common project-config
 
   build-depends:      base >=4.14 && <4.22
   ghc-options:        -Wall
-  ghc-options:        -Wunused-packages
+  ghc-options:        -Wno-unused-packages
 
 library tasty-hang-lib
   import:             project-config
